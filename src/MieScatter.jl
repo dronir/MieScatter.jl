@@ -13,12 +13,12 @@ function compute_mie(size_param::Real, ref_idx::Number, N_angles::Integer)
     n_max = int(max(x_stop, y_modulus) + 15)
     delta_angle = pi / 2 / (N_angles-1)
     
-    mu_table = [cos(j*delta_angle) for j = 1:N_angles]
+    mu_table = [cos((j-1)*delta_angle) for j = 1:N_angles]
     
     d = zeros(Complex128, n_max+1)
     
     # TODO: verify this loop
-    for n = n_max:-1:1
+    for n = n_max-1:-1:1
         rn = n+1
         d[n] = (rn/y) - (1 / (d[n+1] + rn/y))
     end
@@ -41,7 +41,7 @@ function compute_mie(size_param::Real, ref_idx::Number, N_angles::Integer)
     xi1 = Complex128(psi1, -chi1)
     Qsca = 0.0
     
-    for n = 1:n_max
+    for n = 1:int(x_stop)
         fn = (2n+1) / (n*(n+1))
         psi = (2n-1) * psi1/size_param - psi0
         chi = (2n-1) * chi1/size_param - chi0
