@@ -59,10 +59,10 @@ function compute_mie(size_param::Real, ref_idx::Number, N_angles::Integer)
             t = (-1)^n
             p = (-1)^(n-1)
             s1[j] = s1[j] + fn * (an*piX[j] + bn*tau[j])
-            s2[j] = s1[j] + fn * (an*tau[j] + bn*piX[j])
+            s2[j] = s2[j] + fn * (an*tau[j] + bn*piX[j])
             if j != jj
                 s1[jj] = s1[jj] + fn * (an*piX[j]*p + bn*tau[j]*t)
-                s2[jj] = s1[jj] + fn * (an*tau[j]*t + bn*piX[j]*p)
+                s2[jj] = s2[jj] + fn * (an*tau[j]*t + bn*piX[j]*p)
             end
         end
         
