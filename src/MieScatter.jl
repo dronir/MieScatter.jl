@@ -3,10 +3,10 @@ module MieScatter
 
 export compute_mie, size_parameter
 
-size_parameter(radius::Real, wavelength::Real) = 2pi * radius / wavelength
+size_parameter(radius::Real, wavelength::Real) = 2π * radius / wavelength
 
 function compute_mie(size_param::Real, ref_idx::Number, N_angles::Integer)
-    delta_angle = pi / (N_angles-1)
+    delta_angle = π / (N_angles-1)
     compute_mie(size_param, ref_idx, [(i-1)*delta_angle for i = 1:N_angles])
 end
 
@@ -15,17 +15,17 @@ function compute_mie(size_param::Real, ref_idx::Number, angles::Vector{Float64})
     x_stop = size_param + 4 * size_param^0.3333 + 2.0
 
     y_modulus = abs(y)
-    n_max = round(Int,max(x_stop, y_modulus) + 15)
+    n_max = round(Int, max(x_stop, y_modulus) + 15)
 
     mu_table = [cos(theta) for theta in angles]
     N_angles = length(angles)
     idx_forward_scatter = -1
     idx_backscatter = -1
     for i = 1:N_angles
-        if abs(angles[i]-0.0) < 1e-10
+        if angles[i] ≈ 0.0
             idx_forward_scatter = i
         end
-        if abs(angles[i]-pi) < 1e-10
+        if angles[i] - π ≈ 0.0
             idx_backscatter = i
         end
     end
@@ -55,7 +55,7 @@ function compute_mie(size_param::Real, ref_idx::Number, angles::Vector{Float64})
     xi1 = ComplexF64(psi1, -chi1)
     Qsca = 0.0
 
-    for n = 1:round(Int,x_stop)
+    for n = 1:round(Int, x_stop)
         fn = (2n+1) / (n*(n+1))
         psi = (2n-1) * psi1/size_param - psi0
         chi = (2n-1) * chi1/size_param - chi0
