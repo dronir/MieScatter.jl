@@ -1,0 +1,13 @@
+name = "MieScatter"
+uuid = "7038dbdc-10f3-4089-aa24-6a8ce12b2704"
+authors = ["Olli Wilkman <olli.wilkman@iki.fi>"]
+version = "0.2"
+
+[compat]
+julia = "1.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
