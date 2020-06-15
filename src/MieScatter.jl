@@ -88,8 +88,8 @@ function compute_mie(size_param::Real, ref_idx::Number, angles::Vector{Float64})
     end
 
     Qsca *= 2/size_param^2
-    Qext = (idx_forward_scatter > 0) ? (4 / size_param^2) * real(s1[1]) : NaN
-    Qback = (idx_backscatter > 0) ? (4 / size_param^2) * abs(s1[end])^2 : NaN
+    Qext = (idx_forward_scatter > 0) ? (4 / size_param^2) * real(s1[idx_forward_scatter]) : NaN
+    Qback = (idx_backscatter > 0) ? (4 / size_param^2) * abs(s1[idx_backscatter])^2 : NaN
 
     for i = 1:N_angles
         S[i,1] = 0.5 * (abs(s1[i])^2 + abs(s2[i])^2)
